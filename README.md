@@ -23,6 +23,10 @@ A simple ticket management system built with **Next.js (App Router)**, **Prisma 
   ```bash
     npx prisma migrate dev --name init
   ```
+  - **- Gentera prisma client:**
+  ```bash
+    npx prisma generate
+  ```
 - **- - **Seed the database (optional):\*\*
   ```bash
     npx prisma db seed
