@@ -1,4 +1,5 @@
 import Column from '@/components/Column';
+import CreateTicketForm from '@/components/CreateTicketForm';
 import { Ticket } from '@/generated/prisma/client';
 
 async function getTickets() {
@@ -22,6 +23,9 @@ export default async function HomePage() {
 
   return (
     <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
+      <div className='flex justify-end mb-4 md:col-span-3'>
+        <CreateTicketForm />
+      </div>
       <Column
         title='Open'
         tickets={open}

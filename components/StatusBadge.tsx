@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Badge } from './ui/badge';
 
 interface Props {
   status: string;
@@ -11,13 +12,7 @@ const StatusBadge: FC<Props> = ({ status }) => {
     closed: 'bg-green-200 text-green-800',
   };
 
-  return (
-    <span
-      className={`px-2 py-1 rounded text-xs font-semibold ${colors[status]}`}
-    >
-      {status.replace('_', ' ')}
-    </span>
-  );
+  return <Badge className={colors[status]}>{status.replace('_', ' ')}</Badge>;
 };
 
 export default StatusBadge;

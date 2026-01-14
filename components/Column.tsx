@@ -1,6 +1,7 @@
 import { Ticket } from '@/generated/prisma/client';
 import TicketCard from './TicketCard';
 import { FC } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 
 interface Props {
   title: string;
@@ -8,22 +9,24 @@ interface Props {
 }
 const Column: FC<Props> = ({ title, tickets }) => {
   return (
-    <div className='bg-white p-4 rounded shadow'>
-      <h2 className='text-xl font-semibold mb-4'>{title}</h2>
-
-      <div className='space-y-4'>
+    <Card>
+      <CardHeader>
+        <CardTitle>{title}</CardTitle>
+      </CardHeader>
+      <CardContent className='space-y-4'>
         {tickets.map((ticket) => (
-          <TicketCard
+          <div
             key={ticket.id}
-            ticket={ticket}
-          />
+            className='mb-2'
+          >
+            <TicketCard ticket={ticket} />
+          </div>
         ))}
-
         {tickets.length === 0 && (
           <p className='text-gray-500 text-sm'>No tickets here</p>
         )}
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };
 

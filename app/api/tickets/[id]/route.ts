@@ -3,12 +3,14 @@ import { NextRequest } from 'next/server';
 
 export async function GET(
   _req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const id = Number(params.id);
+  const { id } = await params;
+
+  const idNumber = Number(id);
 
   const ticket = await prisma.ticket.findUnique({
-    where: { id },
+    where: { id: idNumber },
   });
 
   if (!ticket) {
@@ -18,15 +20,15 @@ export async function GET(
   return Response.json(ticket);
 }
 
-
 export async function PATCH(
   _req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const id = Number(params.id);
+  const { id } = await params;
+  const idNumber = Number(id);
 
   const ticket = await prisma.ticket.findUnique({
-    where: { id },
+    where: { id: idNumber },
   });
 
   if (!ticket) {
@@ -47,7 +49,7 @@ export async function PATCH(
   }
 
   const updated = await prisma.ticket.update({
-    where: { id },
+    where: { id: idNumber },
     data: { status: nextStatus },
   });
 
